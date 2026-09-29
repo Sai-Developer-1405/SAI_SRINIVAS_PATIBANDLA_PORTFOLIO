@@ -210,20 +210,21 @@ export function Contact() {
             ) : null}
             {sent ? (
               <p role="status" className="mt-3 rounded-lg border border-chart-4/40 bg-chart-4/10 px-3 py-2 text-xs text-chart-4">
-                Your email app should now open with the message ready to send.
+                Message sent! I&apos;ll get back to you at your email address.
               </p>
             ) : null}
 
             <button
               type="submit"
-              className="glow-primary mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
+              disabled={sending}
+              className="glow-primary mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0"
             >
-              <Send className="size-4" />
-              Send Message
+              {sending ? <Loader2 className="size-4 animate-spin" /> : <Send className="size-4" />}
+              {sending ? "Sending..." : "Send Message"}
             </button>
             <p className="mt-3 flex items-center justify-center gap-1.5 text-center text-[11px] text-muted-foreground">
               <Terminal className="size-3" />
-              This opens your email app with the message pre-filled — no data is stored.
+              Delivered straight to my inbox via EmailJS — nothing is stored on this site.
             </p>
           </form>
         </Reveal>
