@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { FolderKanban, Download, Mail, Github, Linkedin } from "lucide-react";
 import { profile } from "@/lib/portfolio-data";
-import portrait from "@/assets/portrait.png";
+import portraitAsset from "@/assets/sai-srinivas-portrait.png.asset.json";
+const portrait = portraitAsset.url;
 
 const heroChips = [
   { label: ".NET", className: "left-[2%] top-[12%] text-chart-1 border-chart-1/40 bg-chart-1/10", delay: "float-slow" },
@@ -110,10 +111,10 @@ export function Hero() {
           <div aria-hidden className="pulse-ring absolute inset-0 -m-4 rounded-full border border-primary/40" />
           <div className="relative overflow-hidden rounded-full border border-primary/30 bg-gradient-to-b from-primary/10 to-transparent p-3">
             <img
-              src={portrait}
-              alt={`Portrait of ${profile.name}`}
-              width={768}
-              height={768}
+              src={portraitAsset.url}
+              alt={`Professional photo of ${profile.name}`}
+              width={1245}
+              height={1280}
               className="aspect-square w-full rounded-full object-cover object-top"
             />
           </div>
