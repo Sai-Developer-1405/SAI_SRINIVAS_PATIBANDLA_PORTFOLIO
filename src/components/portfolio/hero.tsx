@@ -47,6 +47,9 @@ export function Hero() {
 
           <p className="font-display text-xl font-semibold text-foreground/95 sm:text-2xl">{profile.role}</p>
 
+          <p className="text-sm font-medium text-secondary sm:text-base">{profile.tagline}</p>
+
+
           <p className="flex min-h-7 items-center gap-2 text-sm text-muted-foreground sm:text-base">
             <span className="inline-block size-2 rounded-full bg-chart-4" aria-hidden />
             <span className="font-mono">{profile.rotatingPhrases[phraseIndex]}</span>
