@@ -29,7 +29,8 @@ export const profile = {
   location: "Hyderabad, Telangana",
   github: "https://github.com/Sai-Developer-1405",
   linkedin: "https://www.linkedin.com/",
-  resumePath: "/resume.pdf",
+  resumePath: resumeAsset.url,
+  resumeFileName: "SAI_SRINIVAS_PATIBANDLA_RESUME.pdf",
 };
 
 export const navLinks = [
