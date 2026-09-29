@@ -111,10 +111,10 @@ export function Hero() {
           <div aria-hidden className="pulse-ring absolute inset-0 -m-4 rounded-full border border-primary/40" />
           <div className="relative overflow-hidden rounded-full border border-primary/30 bg-gradient-to-b from-primary/10 to-transparent p-3">
             <img
-              src={portrait}
-              alt={`Portrait of ${profile.name}`}
-              width={768}
-              height={768}
+              src={portraitAsset.url}
+              alt={`Professional photo of ${profile.name}`}
+              width={1245}
+              height={1280}
               className="aspect-square w-full rounded-full object-cover object-top"
             />
           </div>
