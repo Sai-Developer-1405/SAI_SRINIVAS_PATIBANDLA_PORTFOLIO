@@ -1,8 +1,14 @@
 import { useState, type FormEvent } from "react";
-import { Mail, Phone, MapPin, Send, Copy, Check, Github, Linkedin, Code2, Terminal } from "lucide-react";
+import emailjs from "@emailjs/browser";
+import { Mail, Phone, MapPin, Send, Copy, Check, Github, Linkedin, Code2, Terminal, Loader2 } from "lucide-react";
 import { profile, codingProfiles } from "@/lib/portfolio-data";
 import { Section } from "./section";
 import { Reveal } from "./reveal";
+
+// EmailJS is a publishable (client-safe) integration — no private keys here.
+const EMAILJS_SERVICE_ID = "service_7kzpgda";
+const EMAILJS_TEMPLATE_ID = "template_s0nsgxo";
+const EMAILJS_PUBLIC_KEY = "X91W4JJjEYMqLpVPX";
 
 function CopyButton({ value }: { value: string }) {
   const [copied, setCopied] = useState(false);
@@ -29,9 +35,10 @@ function CopyButton({ value }: { value: string }) {
 export function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [error, setError] = useState<string | null>(null);
+  const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
       setError("Please fill in your name, email, and message.");
@@ -42,10 +49,29 @@ export function Contact() {
       return;
     }
     setError(null);
-    const subject = encodeURIComponent(`Portfolio contact from ${form.name.trim()}`);
-    const body = encodeURIComponent(`${form.message.trim()}\n\n— ${form.name.trim()} (${form.email.trim()})`);
-    window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
-    setSent(true);
+    setSending(true);
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: form.name.trim(),
+          from_email: form.email.trim(),
+          reply_to: form.email.trim(),
+          message: form.message.trim(),
+          to_name: profile.name,
+        },
+        { publicKey: EMAILJS_PUBLIC_KEY },
+      );
+      setSent(true);
+      setForm({ name: "", email: "", message: "" });
+    } catch {
+      setError(
+        "Something went wrong sending your message. Please try again or email me directly.",
+      );
+    } finally {
+      setSending(false);
+    }
   };
 
   const inputClass =
@@ -184,20 +210,21 @@ export function Contact() {
             ) : null}
             {sent ? (
               <p role="status" className="mt-3 rounded-lg border border-chart-4/40 bg-chart-4/10 px-3 py-2 text-xs text-chart-4">
-                Your email app should now open with the message ready to send.
+                Message sent! I&apos;ll get back to you at your email address.
               </p>
             ) : null}
 
             <button
               type="submit"
-              className="glow-primary mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
+              disabled={sending}
+              className="glow-primary mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0"
             >
-              <Send className="size-4" />
-              Send Message
+              {sending ? <Loader2 className="size-4 animate-spin" /> : <Send className="size-4" />}
+              {sending ? "Sending..." : "Send Message"}
             </button>
             <p className="mt-3 flex items-center justify-center gap-1.5 text-center text-[11px] text-muted-foreground">
               <Terminal className="size-3" />
-              This opens your email app with the message pre-filled — no data is stored.
+              Delivered straight to my inbox via EmailJS — nothing is stored on this site.
             </p>
           </form>
         </Reveal>
