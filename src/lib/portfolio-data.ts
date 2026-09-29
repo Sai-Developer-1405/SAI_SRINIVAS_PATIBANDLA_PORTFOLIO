@@ -4,6 +4,7 @@ import eduportfolioImg from "@/assets/project-eduportfolio.jpg";
 import moviesImg from "@/assets/project-movies.jpg";
 import automotiveImg from "@/assets/project-automotive.jpg";
 import blockchainImg from "@/assets/project-blockchain.jpg";
+import resumeAsset from "@/assets/resume.pdf.asset.json";
 
 export const profile = {
   name: "Sai Srinivas Patibandla",
@@ -29,7 +30,8 @@ export const profile = {
   location: "Hyderabad, Telangana",
   github: "https://github.com/Sai-Developer-1405",
   linkedin: "https://www.linkedin.com/",
-  resumePath: "/resume.pdf",
+  resumePath: resumeAsset.url,
+  resumeFileName: "SAI_SRINIVAS_PATIBANDLA_RESUME.pdf",
 };
 
 export const navLinks = [
