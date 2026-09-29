@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { FolderKanban, Download, Mail, Github, Linkedin } from "lucide-react";
 import { profile } from "@/lib/portfolio-data";
-import portrait from "@/assets/portrait.png";
+import portraitAsset from "@/assets/sai-srinivas-portrait.png.asset.json";
+const portrait = portraitAsset.url;
 
 const heroChips = [
   { label: ".NET", className: "left-[2%] top-[12%] text-chart-1 border-chart-1/40 bg-chart-1/10", delay: "float-slow" },
