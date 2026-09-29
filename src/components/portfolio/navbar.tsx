@@ -65,7 +65,7 @@ export function Navbar() {
         <div className="hidden items-center gap-2 lg:flex">
           <a
             href={profile.resumePath}
-            download
+            download={profile.resumeFileName}
             className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-sm font-medium text-foreground/90 transition-colors hover:bg-accent"
           >
             <Download className="size-4" />
@@ -110,7 +110,7 @@ export function Navbar() {
             <li className="mt-2 grid grid-cols-2 gap-2">
               <a
                 href={profile.resumePath}
-                download
+                download={profile.resumeFileName}
                 className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-border px-3 py-2.5 text-sm font-medium"
               >
                 <Download className="size-4" />
